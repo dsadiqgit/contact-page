@@ -19,22 +19,29 @@
         <meta name="twitter:widgets:border-color" content="#fff" />
         <link rel="canonical" href="<?php echo esc_url( 'https://' . $_SERVER["HTTP_HOST"] . parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) ); ?>" />
     </head>
-    <body <?php body_class();?>>
-    <header id="header" class="hfeed">
-        <div class="container">
-            <div class="logo-div">
-                <a href="/#">
-                    <img class="header-logo " src="<?php bloginfo('template_url'); ?>/images/logo.svg" alt="Baseline logo" width="120px" height="50px">
-                </a>
+    <header id="header">
+        <body <?php body_class();?>>
+        <nav>
+            <div class="nav">
+                <input type="checkbox" id="nav-toggle">
+                <div class="logo">MINZ<strong>CODE</strong></div>
+                <ul class="links">
+                    <?php 
+                        wp_nav_menu( array( 
+                            'theme_location' => 'main-menu', 
+                            'container_class' => '', 
+                            'menu_class' => 'menu', 
+                            'depth' => 0, // Limit to top-level items
+                            'items_wrap' => '%3$s' 
+                        ) ); 
+                    ?>
+                </ul>
+                <label for="nav-toggle" class="icon-burger">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </label>
             </div>
-            <nav>
-                <?php
-                    wp_nav_menu( array( 
-                    'theme_location' => 'main-menu', 
-                    'container_class' => 'main-menu' ) ); 
-                ?>
-            </nav>
-        </div>            
+        </nav>
     </header>
-
 <main id="content" role="main">

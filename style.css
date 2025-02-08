@@ -55,60 +55,150 @@ article a {
   border-radius: 30px;
 }
 
-#header {
-  display: flex;
-  padding: 10px 0 15px 0;
-  background: var(--white);
-}
-#header .container {
-  display: flex;
-  justify-content: space-between;
-}
-#header .container .menu {
-  display: flex;
-  list-style: none;
-  margin-bottom: 0;
-}
-#header .container .menu a {
-  padding-right: 30px;
-}
-#header .container nav {
-  display: flex;
-  align-self: center;
-}
-#header .container nav a {
-  color: var(--black);
-}
-#header .menu {
-  display: flex;
-}
-#header .menu li {
-  list-style: none;
-  display: flex;
-  align-self: center;
-}
-#header .menu .sub-menu {
+#header body {
   display: none;
 }
-#header .menu .menu-item {
+#header .container {
+  position: relative;
+  margin-top: 100px;
+}
+#header .container img {
+  display: block;
+  width: 100%;
+}
+#header .nav {
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  right: 0;
+  top: 0;
+  font-family: "Montserrat", "sans-serif";
+  height: 50px;
+  background-color: rgba(13, 13, 13, 0.2);
+  padding: 0 5%;
+  max-width: 900px;
+  margin: 0 auto;
+  margin-top: 30px;
+  border-radius: 44px;
+  z-index: 99;
+}
+#header .nav .logo {
+  float: left;
+  width: 40%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  color: #fff;
+}
+#header .nav .links {
+  float: right;
+  padding: 0;
+  margin: 0;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+#header .nav .links li {
+  list-style: none;
+}
+#header .nav .links a {
+  display: block;
+  padding: 1em;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
   position: relative;
 }
-#header .menu .menu-item .sub-menu {
-  position: absolute;
-  z-index: 2;
-  width: 160px;
-  margin: 0;
-  padding-left: 0;
-  background: var(--white);
-  margin-top: 30px;
+#header .nav .links a:hover {
+  color: white;
 }
-#header .menu .menu-item:hover > .sub-menu {
-  display: block;
+#header .nav .links a::before {
+  content: "";
   position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: white;
+  visibility: hidden;
+  transform: scaleX(0);
+  transition: all 0.3s ease-in-out 0s;
 }
-#header .menu .menu-item:hover > .sub-menu a {
-  color: var(--black);
-  padding: 5px;
+#header .nav .links a:hover::before {
+  visibility: visible;
+  transform: scaleX(1);
+  color: white;
+}
+#header #nav-toggle {
+  position: absolute;
+  top: -100px;
+}
+#header .nav .icon-burger {
+  display: none;
+  position: absolute;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+#header .nav .icon-burger .line {
+  width: 30px;
+  height: 5px;
+  background-color: #fff;
+  margin: 5px;
+  border-radius: 3px;
+  transition: all 0.5s ease-in-out;
+}
+@media screen and (max-width: 768px) {
+  #header .nav .logo {
+    float: none;
+    width: auto;
+    justify-content: center;
+  }
+  #header .nav .links {
+    float: none;
+    position: fixed;
+    z-index: 0;
+    left: 0;
+    right: 0;
+    top: 0px;
+    bottom: 100%;
+    width: auto;
+    height: auto;
+    flex-direction: column;
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+  }
+  #header .nav .links a {
+    font-size: 20px;
+  }
+  #header .nav :checked ~ .links {
+    bottom: 0;
+  }
+  #header .nav .icon-burger {
+    display: block;
+  }
+  #header .nav :checked ~ .icon-burger .line:nth-child(1) {
+    transform: translateY(10px) rotate(225deg);
+  }
+  #header .nav :checked ~ .icon-burger .line:nth-child(3) {
+    transform: translateY(-10px) rotate(-225deg);
+  }
+  #header .nav :checked ~ .icon-burger .line:nth-child(2) {
+    opacity: 0;
+  }
+}
+#header .menu-header-container {
+  padding-top: 80px;
+}
+@media screen and (min-width: 768px) {
+  #header .menu-header-container {
+    display: flex;
+    padding: 0;
+  }
 }
 
 #footer {
@@ -348,14 +438,10 @@ h1 {
   z-index: 1;
 }
 #half-block .container .lottie {
-  -webkit-animation-name: floating;
-          animation-name: floating;
-  -webkit-animation-duration: 9s;
-          animation-duration: 9s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: ease-in-out;
-          animation-timing-function: ease-in-out;
+  animation-name: floating;
+  animation-duration: 9s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
   margin-left: 30px;
   margin-top: 5px;
 }
@@ -370,17 +456,6 @@ h1 {
     -o-object-fit: cover;
        object-fit: cover;
     height: 100%;
-  }
-}
-@-webkit-keyframes floating {
-  from {
-    transform: translate(0, 0px);
-  }
-  65% {
-    transform: translate(-20px, 80px);
-  }
-  to {
-    transform: translate(0, 0px);
   }
 }
 @keyframes floating {
